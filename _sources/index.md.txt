@@ -6,19 +6,56 @@ hidden: true
 
 
 
+docs/src/tutorial.md
+
+docs/src/how-to.md
+
+docs/src/reference.md
+
+docs/src/explanation.md
+
 
 ```
 
 # spaday-regular-layout
 
-regular-layout for spaday
+Serializable, resizable panel layouts for spaday, powered by `regular-layout`.
 
 [![Build Status](https://github.com/1kbgz/spaday-regular-layout/actions/workflows/build.yaml/badge.svg?branch=main&event=push)](https://github.com/1kbgz/spaday-regular-layout/actions/workflows/build.yaml)
 [![codecov](https://codecov.io/gh/1kbgz/spaday-regular-layout/branch/main/graph/badge.svg)](https://codecov.io/gh/1kbgz/spaday-regular-layout)
 [![License](https://img.shields.io/github/license/1kbgz/spaday-regular-layout)](https://github.com/1kbgz/spaday-regular-layout)
 [![PyPI](https://img.shields.io/pypi/v/spaday-regular-layout.svg)](https://pypi.python.org/pypi/spaday-regular-layout)
 
-## Overview
+## Documentation
 
-> [!NOTE]
-> This library was generated using [copier](https://copier.readthedocs.io/en/stable/) from the [Base Python Project Template repository](https://github.com/python-project-templates/base).
+- [Build a resizable workspace](docs/src/tutorial.md) — guided first layout.
+- [Persist user layout changes](docs/src/how-to.md) — task-focused state synchronization.
+- [API reference](docs/src/reference.md) — layout nodes, components, and events.
+- [Why layouts are serialized](docs/src/explanation.md) — wrapper design and state model.
+
+## Quick example
+
+```python
+from spaday import serve
+from spaday_regular_layout import RegularLayout, RegularLayoutFrame
+
+layout = {
+    "type": "split-layout",
+    "orientation": "horizontal",
+    "sizes": [0.3, 0.7],
+    "children": [
+        {"type": "tab-layout", "tabs": ["nav"]},
+        {"type": "tab-layout", "tabs": ["main"]},
+    ],
+}
+
+page = RegularLayout(
+    RegularLayoutFrame("Navigation", name="nav"),
+    RegularLayoutFrame("Main", name="main"),
+    layout=layout,
+    style="height: 32rem",
+).prop("class", "lorax")
+serve(page, packages=["regular-layout"])
+```
+
+`layout` is the serializable split/tab tree returned by upstream `save()`. Bind it to application state to restore layouts reactively. Browser changes emit `regular-layout-update`; use a spaday event action to persist `event.detail`.
