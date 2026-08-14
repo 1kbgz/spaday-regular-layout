@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "modules": [
+    {
+      "path": "src/ts/index.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "RegularLayout",
+          "customElement": true,
+          "tagName": "spaday-regular-layout",
+          "summary": "Resizable panel layout driven by a serializable split/tab tree.",
+          "attributes": [
+            {
+              "name": "layout",
+              "type": { "text": "unknown" },
+              "description": "Serializable regular-layout split/tab tree."
+            }
+          ],
+          "slots": [{ "name": "" }]
+        },
+        {
+          "kind": "class",
+          "name": "RegularLayoutFrame",
+          "customElement": true,
+          "tagName": "regular-layout-frame",
+          "summary": "Named draggable panel frame inside a RegularLayout.",
+          "attributes": [
+            {
+              "name": "name",
+              "type": { "text": "string" },
+              "description": "Panel name referenced by the layout tree."
+            }
+          ],
+          "slots": [{ "name": "" }]
+        }
+      ]
+    }
+  ]
+}
