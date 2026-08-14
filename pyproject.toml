@@ -85,7 +85,7 @@ replace = '"version": "{new_version}"'
 [tool.coverage.run]
 branch = true
 omit = [
-    "spaday_regular_layout/tests/integration/",
+    "spaday_regular_layout/tests/*",
 ]
 
 [tool.coverage.report]
