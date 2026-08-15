@@ -37,6 +37,13 @@ dependencies = [
 regular-layout = "spaday_regular_layout:package"
 
 [project.optional-dependencies]
+examples = [
+    "pydantic>=2",
+    "starlette",
+    "transports",
+    "uvicorn",
+    "websockets",
+]
 develop = [
     "build",
     "bump-my-version",

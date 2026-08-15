@@ -40,3 +40,14 @@ serve(page, packages=["regular-layout"])
 ```
 
 `layout` is the serializable split/tab tree returned by upstream `save()`. Bind it to application state to restore layouts reactively. Browser changes emit `regular-layout-update`; use a spaday event action to persist `event.detail`.
+
+## Run the local example
+
+```bash
+python -m pip install -e ".[examples]"
+python -m spaday_regular_layout.example
+```
+
+Open `http://127.0.0.1:8013` to resize and rearrange the [complete three-panel example](spaday_regular_layout/example.py). It
+receives a new server layout every five seconds and persists browser rearrangements back to Python. It passes
+the local package descriptor directly, so it does not install or resolve the integration from GitHub.

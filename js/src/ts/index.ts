@@ -6,14 +6,24 @@ import {
 /** A regular-layout whose saved layout tree can be assigned as a spaday prop. */
 export class SpadayRegularLayout extends BaseRegularLayout {
   #pendingLayout: Layout | null = null;
+  #restoring = 0;
 
   connectedCallback(): void {
+    this.#restoring += 1;
     super.connectedCallback();
-    this.style.display ||= "block";
-    if (this.#pendingLayout) {
-      this.restoreSync(this.#pendingLayout);
-      this.#pendingLayout = null;
-    }
+    queueMicrotask(() => {
+      try {
+        if (!this.isConnected || !this.#pendingLayout) return;
+        this.restoreSync(this.#pendingLayout);
+        this.#pendingLayout = null;
+      } finally {
+        this.#restoring -= 1;
+      }
+    });
+  }
+
+  get restoring(): boolean {
+    return this.#restoring > 0;
   }
 
   get layout(): Layout {
@@ -23,7 +33,10 @@ export class SpadayRegularLayout extends BaseRegularLayout {
   set layout(value: Layout | null) {
     if (!value) return;
     if (this.isConnected) {
-      void this.restore(value);
+      this.#restoring += 1;
+      void this.restore(value).finally(() => {
+        this.#restoring -= 1;
+      });
     } else {
       this.#pendingLayout = value;
     }
