@@ -283,6 +283,16 @@
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">layout</span></code> is the serializable split/tab tree returned by upstream <code class="docutils literal notranslate"><span class="pre">save()</span></code>. Bind it to application state to restore layouts reactively. Browser changes emit <code class="docutils literal notranslate"><span class="pre">regular-layout-update</span></code>; use a spaday event action to persist <code class="docutils literal notranslate"><span class="pre">event.detail</span></code>.</p>
 </section>
+<section id="run-the-local-example">
+<h2>Run the local example<a class="headerlink" href="#run-the-local-example" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[examples]&quot;</span>
+python<span class="w"> </span>-m<span class="w"> </span>spaday_regular_layout.example
+</pre></div>
+</div>
+<p>Open <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8013</span></code> to resize and rearrange the <a class="reference download internal" download="" href="_downloads/4589f162897b545d8eaff698dff2e293/example.py"><span class="xref download myst">complete three-panel example</span></a>. It
+receives a new server layout every five seconds and persists browser rearrangements back to Python. It passes
+the local package descriptor directly, so it does not install or resolve the integration from GitHub.</p>
+</section>
 </section>
 
         </article>
