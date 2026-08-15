@@ -109,3 +109,29 @@ test("restores a serializable layout and emits updates", async ({ page }) => {
     )
     .toBe(false);
 });
+
+test("runs the Python layout with browser-to-server updates", async ({
+  page,
+}) => {
+  await page.goto("http://127.0.0.1:8013");
+  const layout = page.locator("spaday-regular-layout");
+  await expect(
+    layout.locator('regular-layout-frame[name="workspace"]'),
+  ).toBeVisible();
+
+  const update = page.waitForRequest(
+    (request) =>
+      request.url().endsWith("/api/layout") && request.method() === "POST",
+  );
+  await layout.evaluate((element) => {
+    element.dispatchEvent(
+      new CustomEvent("regular-layout-update", {
+        detail: { type: "tab-layout", tabs: ["workspace"] },
+      }),
+    );
+  });
+  expect((await update).postDataJSON()).toEqual({
+    type: "tab-layout",
+    tabs: ["workspace"],
+  });
+});
