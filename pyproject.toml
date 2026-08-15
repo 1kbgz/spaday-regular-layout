@@ -37,6 +37,13 @@ dependencies = [
 regular-layout = "spaday_regular_layout:package"
 
 [project.optional-dependencies]
+examples = [
+    "pydantic>=2",
+    "starlette",
+    "transports",
+    "uvicorn",
+    "websockets",
+]
 develop = [
     "build",
     "bump-my-version",
@@ -85,6 +92,7 @@ replace = '"version": "{new_version}"'
 [tool.coverage.run]
 branch = true
 omit = [
+    "spaday_regular_layout/example.py",
     "spaday_regular_layout/tests/*",
 ]
 

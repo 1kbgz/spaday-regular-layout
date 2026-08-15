@@ -30,9 +30,11 @@ async function build() {
   fs.mkdirSync("dist/img", { recursive: true });
   await cpy("src/img/*", "dist/img");
 
-  await cpy("node_modules/regular-layout/themes/lorax.css", "dist/css", {
-    flat: true,
-  });
+  const theme = fs
+    .readFileSync("node_modules/regular-layout/themes/lorax.css", "utf8")
+    .replaceAll("regular-layout.lorax", "spaday-regular-layout.lorax");
+  fs.mkdirSync("dist/css", { recursive: true });
+  fs.writeFileSync("dist/css/lorax.css", theme);
 
   await Promise.all(BUNDLES.map(bundle)).catch(() => process.exit(1));
 

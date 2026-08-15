@@ -52,3 +52,6 @@ divider. Drag the divider; both frames remain mounted while their sizes change.
 
 You now have a workspace whose structure is ordinary serializable data. Continue with
 [Persist user layout changes](how-to.md) to save browser edits.
+
+For a nested workspace with timed server layouts and browser-to-server persistence, run the
+[complete layout example](../../spaday_regular_layout/example.py).
