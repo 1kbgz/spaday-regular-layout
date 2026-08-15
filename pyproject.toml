@@ -92,6 +92,7 @@ replace = '"version": "{new_version}"'
 [tool.coverage.run]
 branch = true
 omit = [
+    "spaday_regular_layout/example.py",
     "spaday_regular_layout/tests/*",
 ]
 
