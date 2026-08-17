@@ -39,6 +39,7 @@ def test_layout_serializes_state_and_named_frames():
 
 def test_package_drives_bootstrap_assets():
     html = bootstrap(packages=[package])
+    assert [schema.tag for schema in package.catalog] == ["spaday-regular-layout", "regular-layout-frame"]
     assert 'href="/components/regular-layout/css/lorax.css"' in html
     assert 'src="/components/regular-layout/cdn/index.js"' in html
 

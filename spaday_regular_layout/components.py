@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from spaday.catalog import ComponentSchema, PropertySchema
 from spaday.component import Child, Component
 
 __all__ = ["RegularLayoutFrame", "SpadayRegularLayout"]
@@ -12,6 +13,14 @@ class SpadayRegularLayout(Component):
     """Resizable panel layout driven by a serializable split/tab tree."""
 
     tag = "spaday-regular-layout"
+    schema = ComponentSchema(
+        tag="spaday-regular-layout",
+        class_name="SpadayRegularLayout",
+        summary="Resizable panel layout driven by a serializable split/tab tree.",
+        props=(PropertySchema(name="layout", kind="json", choices=(), default=None, description="Serializable regular-layout split/tab tree."),),
+        events=(),
+        slots=("",),
+    )
 
     def __init__(
         self,
@@ -34,6 +43,14 @@ class RegularLayoutFrame(Component):
     """Named draggable panel frame inside a RegularLayout."""
 
     tag = "regular-layout-frame"
+    schema = ComponentSchema(
+        tag="regular-layout-frame",
+        class_name="RegularLayoutFrame",
+        summary="Named draggable panel frame inside a RegularLayout.",
+        props=(PropertySchema(name="name", kind="string", choices=(), default=None, description="Panel name referenced by the layout tree."),),
+        events=(),
+        slots=("",),
+    )
 
     def __init__(
         self,
