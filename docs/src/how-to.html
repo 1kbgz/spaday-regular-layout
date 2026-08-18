@@ -250,20 +250,20 @@
     <span class="n">RegularLayout</span><span class="p">(</span><span class="n">layout</span><span class="o">=</span><span class="n">initial_layout</span><span class="p">)</span>
     <span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="o">*</span><span class="n">frames</span><span class="p">)</span>
     <span class="o">.</span><span class="n">on</span><span class="p">(</span>
-        <span class="s2">&quot;regular-layout-update&quot;</span><span class="p">,</span>
-        <span class="n">SendPatch</span><span class="p">(</span><span class="s2">&quot;workspace&quot;</span><span class="p">,</span> <span class="s2">&quot;layout&quot;</span><span class="p">,</span> <span class="n">event_value</span><span class="p">()),</span>
+        <span class="s2">"regular-layout-update"</span><span class="p">,</span>
+        <span class="n">SendPatch</span><span class="p">(</span><span class="s2">"workspace"</span><span class="p">,</span> <span class="s2">"layout"</span><span class="p">,</span> <span class="n">event_value</span><span class="p">()),</span>
     <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Bind the same prop to the mirrored field so server-side updates restore it:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">workspace</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;layout&quot;</span><span class="p">,</span> <span class="s2">&quot;workspace.layout&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">workspace</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">"layout"</span><span class="p">,</span> <span class="s2">"workspace.layout"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If the store is namespaced differently, use that field path in the binding. Keep frame <code class="docutils literal notranslate"><span class="pre">name</span></code> values
 stable across snapshots; each tab node refers to those names.</p>
 <p>Select the package when serving:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">serve</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;regular-layout&quot;</span><span class="p">],</span> <span class="n">wire</span><span class="o">=</span><span class="n">wire</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">serve</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s2">"regular-layout"</span><span class="p">],</span> <span class="n">wire</span><span class="o">=</span><span class="n">wire</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Refer to the <a class="reference internal" href="reference.html"><span class="std std-doc">API reference</span></a> for layout node shapes and event names.</p>

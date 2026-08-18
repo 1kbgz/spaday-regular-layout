@@ -263,29 +263,29 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">spaday_regular_layout</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegularLayout</span><span class="p">,</span> <span class="n">RegularLayoutFrame</span>
 
 <span class="n">layout</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;split-layout&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;orientation&quot;</span><span class="p">:</span> <span class="s2">&quot;horizontal&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sizes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
-    <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tab-layout&quot;</span><span class="p">,</span> <span class="s2">&quot;tabs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;nav&quot;</span><span class="p">]},</span>
-        <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tab-layout&quot;</span><span class="p">,</span> <span class="s2">&quot;tabs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">]},</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"split-layout"</span><span class="p">,</span>
+    <span class="s2">"orientation"</span><span class="p">:</span> <span class="s2">"horizontal"</span><span class="p">,</span>
+    <span class="s2">"sizes"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="s2">"children"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"tab-layout"</span><span class="p">,</span> <span class="s2">"tabs"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"nav"</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"tab-layout"</span><span class="p">,</span> <span class="s2">"tabs"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"main"</span><span class="p">]},</span>
     <span class="p">],</span>
 <span class="p">}</span>
 
 <span class="n">page</span> <span class="o">=</span> <span class="n">RegularLayout</span><span class="p">(</span>
-    <span class="n">RegularLayoutFrame</span><span class="p">(</span><span class="s2">&quot;Navigation&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;nav&quot;</span><span class="p">),</span>
-    <span class="n">RegularLayoutFrame</span><span class="p">(</span><span class="s2">&quot;Main&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">),</span>
+    <span class="n">RegularLayoutFrame</span><span class="p">(</span><span class="s2">"Navigation"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"nav"</span><span class="p">),</span>
+    <span class="n">RegularLayoutFrame</span><span class="p">(</span><span class="s2">"Main"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"main"</span><span class="p">),</span>
     <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">,</span>
-    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;height: 32rem&quot;</span><span class="p">,</span>
-<span class="p">)</span><span class="o">.</span><span class="n">prop</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;lorax&quot;</span><span class="p">)</span>
-<span class="n">serve</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;regular-layout&quot;</span><span class="p">])</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">"height: 32rem"</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">prop</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span> <span class="s2">"lorax"</span><span class="p">)</span>
+<span class="n">serve</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s2">"regular-layout"</span><span class="p">])</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">layout</span></code> is the serializable split/tab tree returned by upstream <code class="docutils literal notranslate"><span class="pre">save()</span></code>. Bind it to application state to restore layouts reactively. Browser changes emit <code class="docutils literal notranslate"><span class="pre">regular-layout-update</span></code>; use a spaday event action to persist <code class="docutils literal notranslate"><span class="pre">event.detail</span></code>.</p>
 </section>
 <section id="run-the-local-example">
 <h2>Run the local example<a class="headerlink" href="#run-the-local-example" title="Link to this heading">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[examples]&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">".[examples]"</span>
 python<span class="w"> </span>-m<span class="w"> </span>spaday_regular_layout.example
 </pre></div>
 </div>

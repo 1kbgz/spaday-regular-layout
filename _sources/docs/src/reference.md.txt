@@ -42,4 +42,5 @@ A tab node has `type="tab-layout"` and a `tabs` list of frame names. A split nod
 ## `package`
 
 `spaday_regular_layout.package` is named `regular-layout`. It serves the Lorax theme followed by the
-self-contained browser registration bundle.
+self-contained browser registration bundle. Its catalog contains `SpadayRegularLayout` and
+`RegularLayoutFrame`, including their property, event, and slot schemas.
