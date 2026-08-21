@@ -41,6 +41,7 @@ def test_package_drives_bootstrap_assets():
     html = bootstrap(packages=[package])
     assert [schema.tag for schema in package.catalog] == ["spaday-regular-layout", "regular-layout-frame"]
     assert 'href="/components/regular-layout/css/lorax.css"' in html
+    assert 'href="/components/regular-layout/css/spa.css"' in html  # the shell-aligned light/dark theme
     assert 'src="/components/regular-layout/cdn/index.js"' in html
 
 
