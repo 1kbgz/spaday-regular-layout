@@ -89,7 +89,7 @@ page = (
         layout=initial_layout,
         style="height: calc(100vh - 2rem); margin: 1rem",
     )
-    .prop("class", "lorax")
+    .prop("class", "spa")  # the shell-aligned theme; upstream's novelty themes (lorax, ...) still apply by class
     .bind("layout", "layout")
     .on(
         "regular-layout-update",
