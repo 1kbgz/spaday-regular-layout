@@ -36,6 +36,9 @@ async function build() {
   fs.mkdirSync("dist/css", { recursive: true });
   fs.writeFileSync("dist/css/lorax.css", theme);
 
+  // Our own shell-aligned theme (light + dark via the --spa-* tokens)
+  await cpy("src/css/spa.css", "dist/css", { flat: true });
+
   await Promise.all(BUNDLES.map(bundle)).catch(() => process.exit(1));
 
   // Copy servable assets to python extension (exclude esm/)

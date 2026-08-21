@@ -135,3 +135,44 @@ test("runs the Python layout with browser-to-server updates", async ({
     tabs: ["workspace"],
   });
 });
+
+test("the spa theme follows the wa-dark page mode on shell tokens", async ({
+  page,
+}) => {
+  await page.goto("/dist/index.html");
+  await page.evaluate(() => {
+    const layout = document.createElement("spaday-regular-layout");
+    layout.className = "spa";
+    layout.style.cssText = "width:800px;height:400px";
+    const frame = document.createElement("regular-layout-frame");
+    frame.setAttribute("name", "main");
+    frame.textContent = "main";
+    layout.appendChild(frame);
+    layout.layout = { type: "tab-layout", tabs: ["main"] };
+    document.body.appendChild(layout);
+  });
+  const container = () =>
+    page
+      .locator('regular-layout-frame[name="main"]')
+      .evaluate(
+        (frame) =>
+          getComputedStyle(frame.shadowRoot.querySelector('[part="container"]'))
+            .backgroundColor,
+      );
+  const activeTab = () =>
+    page
+      .locator('regular-layout-frame[name="main"] regular-layout-tab')
+      .evaluate((tab) => getComputedStyle(tab).backgroundColor);
+
+  await expect.poll(container).toBe("rgb(255, 255, 255)"); // --spa-surface light default
+  expect(await activeTab()).toBe("rgb(255, 255, 255)"); // the active tab shares the surface
+
+  await page.evaluate(() => document.documentElement.classList.add("wa-dark"));
+  await expect.poll(container).toBe("rgb(21, 25, 30)"); // #15191e, the shell's dark surface
+  expect(await activeTab()).toBe("rgb(21, 25, 30)");
+
+  await page.evaluate(() =>
+    document.documentElement.classList.remove("wa-dark"),
+  );
+  await expect.poll(container).toBe("rgb(255, 255, 255)");
+});
