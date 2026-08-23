@@ -1,4 +1,5 @@
 import { bundle } from "./tools/bundle.mjs";
+import { bundle_css } from "./tools/css.mjs";
 import { node_modules_external } from "./tools/externals.mjs";
 
 import fs from "fs";
@@ -36,8 +37,8 @@ async function build() {
   fs.mkdirSync("dist/css", { recursive: true });
   fs.writeFileSync("dist/css/lorax.css", theme);
 
-  // Our own shell-aligned theme (light + dark via the --spa-* tokens)
-  await cpy("src/css/spa.css", "dist/css", { flat: true });
+  // Bundle css (incl. spa.css, our shell-aligned theme — light + dark via the --spa-* tokens)
+  await bundle_css("src/css");
 
   await Promise.all(BUNDLES.map(bundle)).catch(() => process.exit(1));
 
