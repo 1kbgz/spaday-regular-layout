@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" shape-rendering="geometricPrecision" role="img" aria-label="spaday-regular-layout">
+  <title>spaday-regular-layout</title>
+  <defs>
+    <clipPath id="viewport-clip">
+      <rect x="124" y="243" width="1006" height="854" rx="62"/>
+    </clipPath>
+    <clipPath id="blanket-clip">
+      <path d="M627 610 L1078 800 L627 990 L176 800 Z"/>
+    </clipPath>
+  </defs>
+
+  <rect x="88" y="96" width="1078" height="1036" rx="108" fill="#0C4253"/>
+  <rect x="124" y="243" width="1006" height="854" rx="62" fill="#F2F3EF"/>
+  <circle cx="208" cy="175" r="25" fill="#FC6B47"/>
+  <circle cx="295" cy="175" r="25" fill="#AECEC3"/>
+  <circle cx="383" cy="175" r="25" fill="#F2F3EF"/>
+
+  <g clip-path="url(#viewport-clip)">
+    <g transform="translate(627 664) scale(1.07) translate(-627 -664)">
+    <g clip-path="url(#blanket-clip)">
+      <rect x="176" y="610" width="902" height="380" fill="#F2F3EF"/>
+      <g fill="#AECEC3" opacity="0.6">
+        <path d="M590.4 625.4 L717.6 679 L378.9 821.7 L251.7 768.1 Z"/>
+        <path d="M844.8 732.6 L972 786.2 L633.3 928.9 L506.1 875.3 Z"/>
+      </g>
+      <g fill="#AECEC3" opacity="0.6">
+        <path d="M663.6 625.4 L536.4 679 L875.1 821.7 L1002.3 768.1 Z"/>
+        <path d="M409.2 732.6 L282 786.2 L620.7 928.9 L747.9 875.3 Z"/>
+      </g>
+    </g>
+    <path d="M627 610 L1078 800 L627 990 L176 800 Z" fill="none" stroke="#0C4253" stroke-width="18" stroke-linejoin="round"/>
+
+    <ellipse cx="627" cy="700" rx="180" ry="42" fill="#AECEC3"/>
+    <path d="M519 415 C519 318 735 318 735 415" fill="none" stroke="#0C4253" stroke-width="26" stroke-linecap="round"/>
+    <path d="M478 460 L500 700 L754 700 L776 460 Z" fill="#FC6B47"/>
+    <g fill="none" stroke="#0C4253" stroke-width="11">
+      <path d="M485 535 L769 535"/>
+      <path d="M491 600 L763 600"/>
+      <path d="M496 655 L758 655"/>
+    </g>
+    <path d="M462 425 L792 425 L779 480 L475 480 Z" fill="#0C4253"/>
+
+    <g fill="#FC6B47">
+      <circle cx="282" cy="752" r="23"/>
+      <circle cx="972" cy="848" r="23"/>
+    </g>
+  </g>
+  </g>
+</svg>
