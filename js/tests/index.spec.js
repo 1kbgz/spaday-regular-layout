@@ -285,3 +285,39 @@ test("locked layouts select tabs but do not drag-rearrange", async ({
   );
   expect(unlocked).not.toBe(before); // the same gesture rearranges once unlocked
 });
+
+test("tall panel content cannot crush the tab titlebar", async ({ page }) => {
+  await page.goto("/dist/index.html");
+  await page.evaluate(() => {
+    const layout = document.createElement("spaday-regular-layout");
+    layout.id = "tall-rig";
+    layout.className = "spa";
+    layout.style.cssText = "width:800px;height:300px";
+    const frame = document.createElement("regular-layout-frame");
+    frame.setAttribute("name", "chart");
+    const tall = document.createElement("div");
+    tall.style.cssText = "height:5000px";
+    frame.appendChild(tall);
+    layout.appendChild(frame);
+    layout.layout = { type: "tab-layout", tabs: ["chart"] };
+    document.body.appendChild(layout);
+  });
+  await expect(
+    page.locator('regular-layout-frame[name="chart"]'),
+  ).toBeVisible();
+  const r = await page.evaluate(() => {
+    const frame = document.querySelector('regular-layout-frame[name="chart"]');
+    const titlebar = frame.shadowRoot.querySelector('[part~="titlebar"]');
+    const container = frame.shadowRoot.querySelector('[part~="container"]');
+    const cr = container.getBoundingClientRect();
+    return {
+      titlebarHeight: titlebar.getBoundingClientRect().height,
+      containerBottom: cr.bottom,
+      frameBottom: frame.getBoundingClientRect().bottom,
+      scrolls: container.scrollHeight > container.clientHeight,
+    };
+  });
+  expect(r.titlebarHeight).toBe(24); // the min-content floor must not crush the tabs
+  expect(r.containerBottom).toBeLessThanOrEqual(r.frameBottom + 1);
+  expect(r.scrolls).toBe(true); // tall content scrolls inside the panel
+});

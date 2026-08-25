@@ -29,6 +29,19 @@ spaday-regular-layout.spa {
   --spa-rl-shadow: rgba(0, 0, 0, 0.05);
 }
 
+/* Structural, theme-independent (deliberately not gated on `.spa`): the engine's frame is
+ * a column flexbox whose titlebar (height: 24px, shrinkable) loses to the container's
+ * min-content floor when panel content is taller than the frame — the tabs collapse to
+ * zero height and the content paints where they were. Pin the titlebar and let the
+ * container shrink so tall content overflows inside the panel instead. */
+spaday-regular-layout regular-layout-frame::part(titlebar) {
+  flex-shrink: 0;
+}
+
+spaday-regular-layout regular-layout-frame::part(container) {
+  min-height: 0;
+}
+
 spaday-regular-layout.spa regular-layout-frame {
   --rl-tab-width: 200px;
 }
@@ -36,6 +49,7 @@ spaday-regular-layout.spa regular-layout-frame {
 /* Panel content chrome (only the selected frame's container is rendered). */
 spaday-regular-layout.spa regular-layout-frame::part(container) {
   box-sizing: border-box;
+  overflow: auto;
   margin: 0 3px 3px 3px;
   padding: 8px;
   /* Square top-left so the tab strip sits flush; rounded elsewhere. */
