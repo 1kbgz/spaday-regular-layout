@@ -84,8 +84,18 @@ spaday-regular-layout.spa regular-layout-frame::part(close) {
   background: transparent;
   color: var(--spa-rl-muted);
   cursor: pointer;
+  /* The engine renders the close control as an empty <button>; without an
+   * explicit glyph and box it collapses to nothing. */
+  width: 16px;
   height: 14px;
+  padding: 0;
+  font-size: 13px;
+  line-height: 13px;
   align-self: center;
+}
+
+spaday-regular-layout.spa regular-layout-frame::part(close)::before {
+  content: "\00d7";
 }
 
 spaday-regular-layout.spa regular-layout-frame::part(close):hover {

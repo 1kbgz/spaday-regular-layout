@@ -218,3 +218,70 @@ test("survives another bundle registering the engine's elements first", async ({
   expect(r.defineRestored).toBe(true); // the guard did not leak past the engine import
   expect(r.errors).toEqual([]);
 });
+
+test("locked layouts select tabs but do not drag-rearrange", async ({
+  page,
+}) => {
+  await page.goto("/dist/index.html");
+  await page.evaluate(() => {
+    const layout = document.createElement("spaday-regular-layout");
+    layout.id = "locked-rig";
+    layout.locked = true;
+    layout.style.cssText = "width:800px;height:400px";
+    for (const name of ["left", "main"]) {
+      const frame = document.createElement("regular-layout-frame");
+      frame.setAttribute("name", name);
+      frame.textContent = name;
+      layout.appendChild(frame);
+    }
+    layout.layout = {
+      type: "split-layout",
+      orientation: "horizontal",
+      sizes: [0.5, 0.5],
+      children: [
+        { type: "tab-layout", tabs: ["left"] },
+        { type: "tab-layout", tabs: ["main"] },
+      ],
+    };
+    document.body.appendChild(layout);
+  });
+  await expect(page.locator('regular-layout-frame[name="left"]')).toBeVisible();
+  const before = await page.evaluate(() =>
+    JSON.stringify(document.getElementById("locked-rig").save()),
+  );
+
+  const drag = async () => {
+    const left = await page
+      .locator('regular-layout-frame[name="left"]')
+      .boundingBox();
+    const main = await page
+      .locator('regular-layout-frame[name="main"]')
+      .boundingBox();
+    await page.mouse.move(left.x + 30, left.y + 12);
+    await page.mouse.down();
+    await page.mouse.move(main.x + main.width / 2, main.y + main.height / 2, {
+      steps: 8,
+    });
+    await page.mouse.up();
+  };
+
+  await drag();
+  const locked = await page.evaluate(() => {
+    const layout = document.getElementById("locked-rig");
+    return {
+      layout: JSON.stringify(layout.save()),
+      attribute: layout.hasAttribute("locked"),
+    };
+  });
+  expect(locked.attribute).toBe(true); // the property reflects to the attribute
+  expect(locked.layout).toBe(before); // the drag was swallowed
+
+  await page.evaluate(() => {
+    document.getElementById("locked-rig").locked = false;
+  });
+  await drag();
+  const unlocked = await page.evaluate(() =>
+    JSON.stringify(document.getElementById("locked-rig").save()),
+  );
+  expect(unlocked).not.toBe(before); // the same gesture rearranges once unlocked
+});
