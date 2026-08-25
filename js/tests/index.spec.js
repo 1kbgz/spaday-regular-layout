@@ -176,3 +176,45 @@ test("the spa theme follows the wa-dark page mode on shell tokens", async ({
   );
   await expect.poll(container).toBe("rgb(255, 255, 255)");
 });
+
+test("survives another bundle registering the engine's elements first", async ({
+  page,
+}) => {
+  await page.goto("/dist/index.html");
+  const r = await page.evaluate(async () => {
+    // simulate perspective's viewer bundle having won the registration race: its copy
+    // of the engine defines these tags before our bundle executes
+    const errors = [];
+    window.addEventListener("error", (e) => errors.push(String(e.message)));
+    const rig = document.createElement("iframe");
+    document.body.appendChild(rig);
+    const doc = rig.contentDocument;
+    const win = rig.contentWindow;
+    for (const tag of [
+      "regular-layout",
+      "regular-layout-frame",
+      "regular-layout-tab",
+    ]) {
+      win.customElements.define(tag, class extends win.HTMLElement {});
+    }
+    let imported = true;
+    try {
+      await win.eval(`import("${location.origin}/dist/cdn/index.js")`);
+    } catch (error) {
+      imported = false;
+      errors.push(String(error));
+    }
+    return {
+      imported,
+      wrapperDefined: !!win.customElements.get("spaday-regular-layout"),
+      defineRestored:
+        win.customElements.define !== undefined &&
+        String(win.customElements.define).includes("native code"),
+      errors,
+    };
+  });
+  expect(r.imported).toBe(true); // the bundle no longer dies on the double define
+  expect(r.wrapperDefined).toBe(true); // and still registers the wrapper element
+  expect(r.defineRestored).toBe(true); // the guard did not leak past the engine import
+  expect(r.errors).toEqual([]);
+});

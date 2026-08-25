@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       regular-layout:
-        specifier: ^0.6.1
+        specifier: '=0.6.1'
         version: 0.6.1
     devDependencies:
       '@playwright/test':
