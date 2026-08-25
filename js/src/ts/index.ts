@@ -12,6 +12,31 @@ export class SpadayRegularLayout extends BaseRegularLayout {
   #pendingLayout: Layout | null = null;
   #restoring = 0;
 
+  constructor() {
+    super();
+    // Frames drive drag-rearranging through these two instance methods; a
+    // locked layout swallows them so tabs still select and close but panels
+    // cannot be dragged into new positions.
+    const setOverlay = this.setOverlayState;
+    const clearOverlay = this.clearOverlayState;
+    this.setOverlayState = async (...args) => {
+      if (this.locked) return;
+      return setOverlay(...args);
+    };
+    this.clearOverlayState = async (...args) => {
+      if (this.locked) return;
+      return clearOverlay(...args);
+    };
+  }
+
+  get locked(): boolean {
+    return this.hasAttribute("locked");
+  }
+
+  set locked(value: boolean) {
+    this.toggleAttribute("locked", Boolean(value));
+  }
+
   connectedCallback(): void {
     this.#restoring += 1;
     super.connectedCallback();
