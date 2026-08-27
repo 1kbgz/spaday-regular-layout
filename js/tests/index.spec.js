@@ -321,3 +321,32 @@ test("tall panel content cannot crush the tab titlebar", async ({ page }) => {
   expect(r.containerBottom).toBeLessThanOrEqual(r.frameBottom + 1);
   expect(r.scrolls).toBe(true); // tall content scrolls inside the panel
 });
+
+test("openPanel inserts a missing panel and selects an existing one", async ({
+  page,
+}) => {
+  await page.goto("/dist/index.html");
+  const r = await page.evaluate(async () => {
+    const layout = document.createElement("spaday-regular-layout");
+    layout.style.cssText = "width:600px;height:300px";
+    for (const name of ["home", "extra"]) {
+      const frame = document.createElement("regular-layout-frame");
+      frame.setAttribute("name", name);
+      frame.textContent = name;
+      layout.appendChild(frame);
+    }
+    layout.layout = { type: "tab-layout", tabs: ["home"] };
+    document.body.appendChild(layout);
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+
+    await layout.openPanel("extra"); // not laid out yet: inserted, then selected
+    const afterInsert = layout.save();
+    await layout.openPanel("home"); // already present: selected only, no duplicate
+    const afterSelect = layout.save();
+    return { afterInsert, afterSelect };
+  });
+  expect([...r.afterInsert.tabs].sort()).toEqual(["extra", "home"]);
+  expect(r.afterInsert.tabs[r.afterInsert.selected]).toBe("extra"); // inserted and selected
+  expect([...r.afterSelect.tabs].sort()).toEqual(["extra", "home"]); // no duplicate insert
+  expect(r.afterSelect.tabs[r.afterSelect.selected]).toBe("home"); // selected only
+});

@@ -13,11 +13,36 @@
           "attributes": [
             {
               "name": "layout",
-              "type": { "text": "unknown" },
+              "type": {
+                "text": "unknown"
+              },
               "description": "Serializable regular-layout split/tab tree."
             }
           ],
-          "slots": [{ "name": "" }]
+          "slots": [
+            {
+              "name": ""
+            }
+          ],
+          "methods": [
+            {
+              "name": "openPanel",
+              "description": "Insert `name` if it is not laid out yet, then select it \u2014 the one-call \"open this tab\", made for spaday's Invoke action.",
+              "parameters": [
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            }
+          ]
         },
         {
           "kind": "class",
@@ -28,11 +53,17 @@
           "attributes": [
             {
               "name": "name",
-              "type": { "text": "string" },
+              "type": {
+                "text": "string"
+              },
               "description": "Panel name referenced by the layout tree."
             }
           ],
-          "slots": [{ "name": "" }]
+          "slots": [
+            {
+              "name": ""
+            }
+          ]
         }
       ]
     }

@@ -59,6 +59,15 @@ export class SpadayRegularLayout extends BaseRegularLayout {
     return this.save();
   }
 
+  /** Insert `name` if it is not laid out yet, then select it — the one-call "open this tab",
+   * made for spaday's `Invoke` action:
+   * `Invoke(by_id("layout"), "openPanel", event_prop("currentTarget.dataset.tab"))`. */
+  async openPanel(name: string): Promise<void> {
+    if (!name) return;
+    if (this.calculatePath(name) === null) await this.insertPanel(name);
+    await this.select(name);
+  }
+
   set layout(value: Layout | null) {
     if (!value) return;
     if (this.isConnected) {
