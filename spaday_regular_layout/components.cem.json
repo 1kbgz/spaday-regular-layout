@@ -49,7 +49,7 @@
           "name": "RegularLayoutFrame",
           "customElement": true,
           "tagName": "regular-layout-frame",
-          "summary": "Named draggable panel frame inside a RegularLayout.",
+          "summary": "Named draggable panel frame inside a RegularLayout. Its content area (::part(container)) is display: block with a definite height, so slotted content fills it with height: 100%, not flex: 1.",
           "attributes": [
             {
               "name": "name",

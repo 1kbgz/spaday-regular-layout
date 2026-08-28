@@ -40,13 +40,13 @@ class SpadayRegularLayout(Component):
 
 
 class RegularLayoutFrame(Component):
-    """Named draggable panel frame inside a RegularLayout."""
+    """Named draggable panel frame inside a RegularLayout. Its content area (::part(container)) is display: block with a definite height, so slotted content fills it with height: 100%, not flex: 1."""
 
     tag = "regular-layout-frame"
     schema = ComponentSchema(
         tag="regular-layout-frame",
         class_name="RegularLayoutFrame",
-        summary="Named draggable panel frame inside a RegularLayout.",
+        summary="Named draggable panel frame inside a RegularLayout. Its content area (::part(container)) is display: block with a definite height, so slotted content fills it with height: 100%, not flex: 1.",
         props=(PropertySchema(name="name", kind="string", choices=(), default=None, description="Panel name referenced by the layout tree."),),
         events=(),
         slots=("",),
