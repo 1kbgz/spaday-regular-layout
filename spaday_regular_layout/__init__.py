@@ -4,7 +4,7 @@ from spaday import ComponentPackage
 
 from .components import RegularLayoutFrame, SpadayRegularLayout
 
-__version__ = "0.2.4"
+__version__ = "0.2.5"
 
 package = ComponentPackage(
     name="regular-layout",
