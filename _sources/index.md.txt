@@ -65,6 +65,8 @@ serve(page, packages=["regular-layout"])
 
 `layout` is the serializable split/tab tree returned by upstream `save()`. Bind it to application state to restore layouts reactively. Browser changes emit `regular-layout-update`; use a spaday event action to persist `event.detail`.
 
+Each frame's content area (`regular-layout-frame::part(container)`) is `display: block` with a definite height, not a flex container, so `flex: 1` on slotted content silently does nothing. Give slotted content `height: 100%` to fill a panel.
+
 ## Run the local example
 
 ```bash

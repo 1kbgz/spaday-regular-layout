@@ -26,6 +26,10 @@ Tag: `<regular-layout-frame>`.
 
 Frames are default-slot children of `RegularLayout`.
 
+The frame's content area (`::part(container)`) computes to `display: block` with a definite height,
+so `flex: 1` on slotted children silently does nothing. Use `height: 100%` on slotted content to
+fill the panel.
+
 ## Layout nodes
 
 A tab node has `type="tab-layout"` and a `tabs` list of frame names. A split node has
