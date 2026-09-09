@@ -1,4 +1,8 @@
-/* The `spa` theme: neutral panel chrome aligned with the spaday shell and WebAwesome.
+/* Tokens: --spa-regular-layout-* is the documented override (read-only here, so an App-level
+ * theme set on an ancestor still wins); the --spa-rl-* spelling it shipped under stays as an
+ * alias; each falls back to the shell token it belongs to, then a literal.
+ *
+ * The `spa` theme: neutral panel chrome aligned with the spaday shell and WebAwesome.
  * Apply with class="spa" on <spaday-regular-layout>. Every color rides a local token
  * that defers to the shell's --spa-* variables, so an application that re-themes the
  * shell carries the layout with it, and spaday's page-mode convention applies: `wa-dark`
@@ -6,27 +10,72 @@
  * fallbacks keep a standalone page coherent in both modes. */
 
 spaday-regular-layout.spa {
-  --spa-rl-surface: var(--spa-surface, #fff);
-  --spa-rl-surface-2: var(--spa-surface-2, #fafafa);
-  --spa-rl-border: var(--spa-border, #e6e6e6);
-  --spa-rl-muted: var(--spa-muted, #666);
-  --spa-rl-shadow: rgba(0, 0, 0, 0.05);
+  --_spa-regular-layout-surface: var(
+    --spa-regular-layout-surface,
+    var(--spa-rl-surface, var(--spa-surface, #fff))
+  );
+  --_spa-regular-layout-surface-2: var(
+    --spa-regular-layout-surface-2,
+    var(--spa-rl-surface-2, var(--spa-surface-2, #fafafa))
+  );
+  --_spa-regular-layout-border: var(
+    --spa-regular-layout-border,
+    var(--spa-rl-border, var(--spa-border, #e6e6e6))
+  );
+  --_spa-regular-layout-muted: var(
+    --spa-regular-layout-muted,
+    var(--spa-rl-muted, var(--spa-muted, #666))
+  );
+  --_spa-regular-layout-shadow: var(
+    --spa-regular-layout-shadow,
+    var(--spa-rl-shadow, rgba(0, 0, 0, 0.05))
+  );
 }
 
 :where(.wa-dark) spaday-regular-layout.spa {
-  --spa-rl-surface: var(--spa-surface, #15191e);
-  --spa-rl-surface-2: var(--spa-surface-2, #1d232b);
-  --spa-rl-border: var(--spa-border, #333b45);
-  --spa-rl-muted: var(--spa-muted, #9aa3ad);
-  --spa-rl-shadow: rgba(0, 0, 0, 0.35);
+  --_spa-regular-layout-surface: var(
+    --spa-regular-layout-surface,
+    var(--spa-rl-surface, var(--spa-surface, #15191e))
+  );
+  --_spa-regular-layout-surface-2: var(
+    --spa-regular-layout-surface-2,
+    var(--spa-rl-surface-2, var(--spa-surface-2, #1d232b))
+  );
+  --_spa-regular-layout-border: var(
+    --spa-regular-layout-border,
+    var(--spa-rl-border, var(--spa-border, #333b45))
+  );
+  --_spa-regular-layout-muted: var(
+    --spa-regular-layout-muted,
+    var(--spa-rl-muted, var(--spa-muted, #9aa3ad))
+  );
+  --_spa-regular-layout-shadow: var(
+    --spa-regular-layout-shadow,
+    var(--spa-rl-shadow, rgba(0, 0, 0, 0.35))
+  );
 }
 
 :where(.wa-light) spaday-regular-layout.spa {
-  --spa-rl-surface: var(--spa-surface, #fff);
-  --spa-rl-surface-2: var(--spa-surface-2, #fafafa);
-  --spa-rl-border: var(--spa-border, #e6e6e6);
-  --spa-rl-muted: var(--spa-muted, #666);
-  --spa-rl-shadow: rgba(0, 0, 0, 0.05);
+  --_spa-regular-layout-surface: var(
+    --spa-regular-layout-surface,
+    var(--spa-rl-surface, var(--spa-surface, #fff))
+  );
+  --_spa-regular-layout-surface-2: var(
+    --spa-regular-layout-surface-2,
+    var(--spa-rl-surface-2, var(--spa-surface-2, #fafafa))
+  );
+  --_spa-regular-layout-border: var(
+    --spa-regular-layout-border,
+    var(--spa-rl-border, var(--spa-border, #e6e6e6))
+  );
+  --_spa-regular-layout-muted: var(
+    --spa-regular-layout-muted,
+    var(--spa-rl-muted, var(--spa-muted, #666))
+  );
+  --_spa-regular-layout-shadow: var(
+    --spa-regular-layout-shadow,
+    var(--spa-rl-shadow, rgba(0, 0, 0, 0.05))
+  );
 }
 
 /* Structural, theme-independent (deliberately not gated on `.spa`): the engine's frame is
@@ -54,9 +103,9 @@ spaday-regular-layout.spa regular-layout-frame::part(container) {
   padding: 8px;
   /* Square top-left so the tab strip sits flush; rounded elsewhere. */
   border-radius: 0 8px 8px 8px;
-  border: 1px solid var(--spa-rl-border);
-  background: var(--spa-rl-surface);
-  box-shadow: 0 1px 2px var(--spa-rl-shadow);
+  border: 1px solid var(--_spa-regular-layout-border);
+  background: var(--_spa-regular-layout-surface);
+  box-shadow: 0 1px 2px var(--_spa-regular-layout-shadow);
 }
 
 /* Transparent strip; the engine tiles the per-frame tabs across it. */
@@ -73,11 +122,11 @@ spaday-regular-layout.spa regular-layout-frame::part(tab) {
   padding: 0 10px;
   margin-right: 2px;
   cursor: pointer;
-  border: 1px solid var(--spa-rl-border);
+  border: 1px solid var(--_spa-regular-layout-border);
   border-bottom: none;
   border-radius: 8px 8px 0 0;
-  background: var(--spa-rl-surface-2);
-  color: var(--spa-rl-muted);
+  background: var(--_spa-regular-layout-surface-2);
+  color: var(--_spa-regular-layout-muted);
 }
 
 spaday-regular-layout.spa regular-layout-frame::part(title) {
@@ -88,7 +137,7 @@ spaday-regular-layout.spa regular-layout-frame::part(title) {
 
 /* The active tab shares the container's surface so the two read as one panel. */
 spaday-regular-layout.spa regular-layout-frame::part(active-tab) {
-  background: var(--spa-rl-surface);
+  background: var(--_spa-regular-layout-surface);
   color: inherit;
 }
 
@@ -96,7 +145,7 @@ spaday-regular-layout.spa regular-layout-frame::part(close) {
   border: none;
   border-radius: 4px;
   background: transparent;
-  color: var(--spa-rl-muted);
+  color: var(--_spa-regular-layout-muted);
   cursor: pointer;
   /* The engine renders the close control as an empty <button>; without an
    * explicit glyph and box it collapses to nothing. */
@@ -114,7 +163,7 @@ spaday-regular-layout.spa regular-layout-frame::part(close)::before {
 
 spaday-regular-layout.spa regular-layout-frame::part(close):hover {
   transition: background-color 0.2s;
-  background-color: var(--spa-rl-surface-2);
+  background-color: var(--_spa-regular-layout-surface-2);
 }
 
 /* While dragging, dim the settled frames and accent the floating one. */
@@ -127,8 +176,8 @@ spaday-regular-layout.spa:has(.overlay) > .overlay {
 }
 
 spaday-regular-layout.spa regular-layout-frame.overlay {
-  background: var(--spa-rl-surface-2);
-  border: 1px dashed var(--spa-rl-border);
+  background: var(--_spa-regular-layout-surface-2);
+  border: 1px dashed var(--_spa-regular-layout-border);
   border-radius: 8px;
   transition:
     top 0.1s ease-in-out,
