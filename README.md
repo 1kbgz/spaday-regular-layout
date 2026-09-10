@@ -58,3 +58,6 @@ python -m spaday_regular_layout.example
 Open `http://127.0.0.1:8013` to resize and rearrange the [complete three-panel example](spaday_regular_layout/example.py). It
 receives a new server layout every five seconds and persists browser rearrangements back to Python. It passes
 the local package descriptor directly, so it does not install or resolve the integration from GitHub.
+
+> [!NOTE]
+> This library was generated using [copier](https://copier.readthedocs.io/en/stable/) from the [Base Python Project Template repository](https://github.com/python-project-templates/base).
