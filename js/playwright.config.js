@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const pyodideOnly = process.env.SPADAY_REGULAR_LAYOUT_PYODIDE_ONLY === "1";
+
 export default defineConfig({
   testDir: "tests",
   fullyParallel: true,
@@ -28,11 +30,15 @@ export default defineConfig({
       reuseExistingServer: !process.env.CI,
       timeout: 120 * 1000,
     },
-    {
-      command: "python -m spaday_regular_layout.example",
-      url: "http://127.0.0.1:8013",
-      reuseExistingServer: !process.env.CI,
-      timeout: 120 * 1000,
-    },
+    ...(pyodideOnly
+      ? []
+      : [
+          {
+            command: "python -m spaday_regular_layout.example",
+            url: "http://127.0.0.1:8013",
+            reuseExistingServer: !process.env.CI,
+            timeout: 120 * 1000,
+          },
+        ]),
   ],
 });
