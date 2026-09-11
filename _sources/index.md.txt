@@ -69,6 +69,8 @@ Each frame's content area (`regular-layout-frame::part(container)`) is `display:
 
 ## Run the local example
 
+[Run the complete example in your browser](https://1kbgz.github.io/spaday-regular-layout/lite/) — Python runs locally through Pyodide; no install or server required.
+
 ```bash
 python -m pip install -e ".[examples]"
 python -m spaday_regular_layout.example
