@@ -1,11 +1,16 @@
 // the guard must execute before the engine module registers its elements
 import { restoreDefine } from "./define-guard";
+import { version } from "regular-layout/package.json";
 import {
   RegularLayout as BaseRegularLayout,
   type Layout,
 } from "regular-layout";
 
-restoreDefine();
+restoreDefine(`regular-layout ${version}`, [
+  "regular-layout",
+  "regular-layout-frame",
+  "regular-layout-tab",
+]);
 
 /** A regular-layout whose saved layout tree can be assigned as a spaday prop. */
 export class SpadayRegularLayout extends BaseRegularLayout {
