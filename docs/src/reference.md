@@ -45,6 +45,11 @@ A tab node has `type="tab-layout"` and a `tabs` list of frame names. A split nod
 
 ## `package`
 
+The `spa` theme marks the selected application tab with a three-pixel top inset and semibold
+text. This distinguishes outer layout navigation from a nested Perspective workspace's tabs.
+The marker follows the tab's text color in light and dark modes. Dragging a nested Perspective
+tab stays within that workspace; this styling does not enable cross-workspace moves.
+
 `spaday_regular_layout.package` is named `regular-layout`. It serves the Lorax theme followed by the
 self-contained browser registration bundle. Its catalog contains `SpadayRegularLayout` and
 `RegularLayoutFrame`, including their property, event, and slot schemas.

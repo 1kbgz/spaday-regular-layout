@@ -144,6 +144,8 @@ spaday-regular-layout.spa regular-layout-frame::part(title) {
 spaday-regular-layout.spa regular-layout-frame::part(active-tab) {
   background: var(--_spa-regular-layout-surface);
   color: inherit;
+  box-shadow: inset 0 3px 0 currentColor;
+  font-weight: 600;
 }
 
 spaday-regular-layout.spa regular-layout-frame::part(close) {
