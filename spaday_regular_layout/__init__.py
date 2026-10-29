@@ -5,7 +5,7 @@ from spaday import ComponentPackage, Token
 
 from .components import RegularLayoutFrame, SpadayRegularLayout
 
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 
 # the exact version of each JS library the package serves, written by its JS build
 _VERSIONS = Path(__file__).parent / "extension" / "versions.json"
