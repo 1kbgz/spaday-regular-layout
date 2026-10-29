@@ -83,6 +83,11 @@ spaday-regular-layout.spa {
  * min-content floor when panel content is taller than the frame — the tabs collapse to
  * zero height and the content paints where they were. Pin the titlebar and let the
  * container shrink so tall content overflows inside the panel instead. */
+spaday-regular-layout regular-layout-frame {
+  min-width: 0;
+  min-height: 0;
+}
+
 spaday-regular-layout regular-layout-frame::part(titlebar) {
   flex-shrink: 0;
 }
