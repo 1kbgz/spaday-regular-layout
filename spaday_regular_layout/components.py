@@ -47,7 +47,35 @@ class RegularLayoutFrame(Component):
         tag="regular-layout-frame",
         class_name="RegularLayoutFrame",
         summary="Named draggable panel frame inside a RegularLayout. Its content area (::part(container)) is display: block with a definite height, so slotted content fills it with height: 100%, not flex: 1.",
-        props=(PropertySchema(name="name", kind="string", choices=(), default=None, description="Panel name referenced by the layout tree."),),
+        props=(
+            PropertySchema(name="name", kind="string", choices=(), default=None, description="Panel name referenced by the layout tree."),
+            PropertySchema(
+                name="min-width", kind="string", choices=(), default=None, description="Min frame width in px, rem, em, or percent of the layout."
+            ),
+            PropertySchema(
+                name="preferred-width",
+                kind="string",
+                choices=(),
+                default=None,
+                description="Preferred frame width in px, rem, em, or percent of the layout.",
+            ),
+            PropertySchema(
+                name="max-width", kind="string", choices=(), default=None, description="Max frame width in px, rem, em, or percent of the layout."
+            ),
+            PropertySchema(
+                name="min-height", kind="string", choices=(), default=None, description="Min frame height in px, rem, em, or percent of the layout."
+            ),
+            PropertySchema(
+                name="preferred-height",
+                kind="string",
+                choices=(),
+                default=None,
+                description="Preferred frame height in px, rem, em, or percent of the layout.",
+            ),
+            PropertySchema(
+                name="max-height", kind="string", choices=(), default=None, description="Max frame height in px, rem, em, or percent of the layout."
+            ),
+        ),
         events=(),
         slots=("",),
     )
@@ -57,6 +85,12 @@ class RegularLayoutFrame(Component):
         *children: Child,
         key: str | None = None,
         name: str | None = None,
+        min_width: str | None = None,
+        preferred_width: str | None = None,
+        max_width: str | None = None,
+        min_height: str | None = None,
+        preferred_height: str | None = None,
+        max_height: str | None = None,
         **props: Any,
     ) -> None:
         super().__init__(
@@ -64,6 +98,12 @@ class RegularLayoutFrame(Component):
             key=key,
             props={
                 "name": name,
+                "min-width": min_width,
+                "preferred-width": preferred_width,
+                "max-width": max_width,
+                "min-height": min_height,
+                "preferred-height": preferred_height,
+                "max-height": max_height,
             },
             **props,
         )
