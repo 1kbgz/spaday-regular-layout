@@ -136,6 +136,9 @@
   <li class="fd-toc-item" data-depth="1">
     <a href="#package">package</a>
   </li>
+  <li class="fd-toc-item" data-depth="1">
+    <a href="#place-and-size-panels">Place and size panels</a>
+  </li>
 </ul>
 </div>
   </div>
@@ -229,6 +232,37 @@ tab stays within that workspace; this styling does not enable cross-workspace mo
 self-contained browser registration bundle. Its catalog contains <code class="docutils literal notranslate"><span class="pre">SpadayRegularLayout</span></code> and
 <code class="docutils literal notranslate"><span class="pre">RegularLayoutFrame</span></code>, including their property, event, and slot schemas.</p>
 </section>
+<section id="place-and-size-panels">
+<h2>Place and size panels<a class="headerlink" href="#place-and-size-panels" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">await</span> <span class="pre">layout.ensurePanel(name,</span> <span class="pre">{beside,</span> <span class="pre">side,</span> <span class="pre">stackBelow})</span></code> inserts an absent frame
+beside the named panel’s tab stack and selects it. <code class="docutils literal notranslate"><span class="pre">side</span></code> is <code class="docutils literal notranslate"><span class="pre">left</span></code>, <code class="docutils literal notranslate"><span class="pre">right</span></code>
+(default), <code class="docutils literal notranslate"><span class="pre">top</span></code>, or <code class="docutils literal notranslate"><span class="pre">bottom</span></code>. Below <code class="docutils literal notranslate"><span class="pre">stackBelow</span></code> pixels of <strong>layout width</strong>, initial
+placement switches to <code class="docutils literal notranslate"><span class="pre">bottom</span></code>. Calls for an existing panel select it without
+moving it or resetting its split sizes. Resizing the window does not move existing
+panels. Calls are serialized, including concurrent requests for the same panel.
+Both frames must already be children of the layout; <code class="docutils literal notranslate"><span class="pre">beside</span></code> must be laid out.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">spaday</span><span class="w"> </span><span class="kn">import</span> <span class="n">Invoke</span><span class="p">,</span> <span class="n">by_id</span><span class="p">,</span> <span class="n">element</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">spaday_regular_layout</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegularLayoutFrame</span>
+
+<span class="n">editor</span> <span class="o">=</span> <span class="n">RegularLayoutFrame</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"editor"</span><span class="p">,</span> <span class="n">min_width</span><span class="o">=</span><span class="s2">"26rem"</span><span class="p">,</span> <span class="n">preferred_width</span><span class="o">=</span><span class="s2">"32rem"</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="s2">"40rem"</span>
+<span class="p">)</span>
+<span class="n">open_editor</span> <span class="o">=</span> <span class="n">element</span><span class="p">(</span><span class="s2">"button"</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">"Open editor"</span><span class="p">)</span><span class="o">.</span><span class="n">on</span><span class="p">(</span>
+    <span class="s2">"click"</span><span class="p">,</span>
+    <span class="n">Invoke</span><span class="p">(</span><span class="n">by_id</span><span class="p">(</span><span class="s2">"layout"</span><span class="p">),</span> <span class="s2">"ensurePanel"</span><span class="p">,</span> <span class="s2">"editor"</span><span class="p">,</span>
+           <span class="p">{</span><span class="s2">"beside"</span><span class="p">:</span> <span class="s2">"workspace"</span><span class="p">,</span> <span class="s2">"side"</span><span class="p">:</span> <span class="s2">"right"</span><span class="p">,</span> <span class="s2">"stackBelow"</span><span class="p">:</span> <span class="mi">800</span><span class="p">}),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Frames accept <code class="docutils literal notranslate"><span class="pre">min_width</span></code>, <code class="docutils literal notranslate"><span class="pre">preferred_width</span></code>, <code class="docutils literal notranslate"><span class="pre">max_width</span></code> and equivalent height
+properties (HTML attributes use hyphens). Values support <code class="docutils literal notranslate"><span class="pre">px</span></code>, <code class="docutils literal notranslate"><span class="pre">rem</span></code>, <code class="docutils literal notranslate"><span class="pre">em</span></code>, and
+percentages of the layout. Unsupported units are ignored. Preferred sizes apply
+when <code class="docutils literal notranslate"><span class="pre">ensurePanel</span></code> inserts a frame; saved layouts retain their proportions within
+min/max bounds. The selected frame determines a tab stack’s bounds. Constraints
+apply on restore, after divider release, when bounds change, and on host resize.
+If bounds cannot fit the container, available space takes precedence: minima or
+maxima are scaled proportionally so panels fill the container without overlap.</p>
+</section>
 </section>
 
 
@@ -281,6 +315,9 @@ self-contained browser registration bundle. Its catalog contains <code class="do
   </li>
   <li class="fd-toc-item" data-depth="1">
     <a href="#package">package</a>
+  </li>
+  <li class="fd-toc-item" data-depth="1">
+    <a href="#place-and-size-panels">Place and size panels</a>
   </li>
 </ul>
 

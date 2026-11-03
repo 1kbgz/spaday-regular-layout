@@ -6,7 +6,7 @@ from typing import Any
 import transports
 import uvicorn
 from pydantic import BaseModel
-from spaday import CallEndpoint, If, Wire, element, event_value, not_, prop, this
+from spaday import CallEndpoint, If, Invoke, Wire, by_id, element, event_value, not_, prop, this
 from spaday.backends.starlette import serve
 from starlette.responses import JSONResponse
 from starlette.routing import Route, WebSocketRoute
@@ -84,8 +84,17 @@ def panel(title: str, copy: str, name: str) -> RegularLayoutFrame:
 page = (
     RegularLayout(
         panel("Navigation", "Drag this panel's tab to rearrange it.", "navigation"),
-        panel("Workspace", "Drop another tab here to create a stack.", "workspace"),
+        RegularLayoutFrame(
+            element("h2").text("Workspace"),
+            element("p").text("Open the editor beside this panel, or below it in a narrow layout."),
+            element("button")
+            .text("Open editor")
+            .on("click", Invoke(by_id("layout"), "ensurePanel", "editor", {"beside": "workspace", "stackBelow": 800})),
+            name="workspace",
+        ),
+        RegularLayoutFrame("Editor", name="editor", min_width="16rem", preferred_width="24rem", max_width="32rem"),
         panel("Activity", "Drag either divider to resize nested splits.", "activity"),
+        id="layout",
         layout=initial_layout,
         style="height: calc(100vh - 2rem); margin: 1rem",
     )
