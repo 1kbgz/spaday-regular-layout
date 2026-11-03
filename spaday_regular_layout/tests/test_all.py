@@ -62,3 +62,12 @@ def test_structured_fallbacks_match_the_stylesheet():
         private = prop.replace("--spa-", "--_spa-")
         definitions = re.findall(rf"{private}:([^;]+);", css)
         assert definitions and all(f"var({fallback}," in definition for definition in definitions)
+
+
+def test_frame_dimensions_are_generated_properties():
+    frame = RegularLayoutFrame(name="editor", min_width="26rem", preferred_width="32rem", max_width="40rem", min_height="200px")
+    props = frame.to_node()["props"]
+    assert props["min-width"] == {"Str": "26rem"}
+    assert props["preferred-width"] == {"Str": "32rem"}
+    assert props["max-width"] == {"Str": "40rem"}
+    assert props["min-height"] == {"Str": "200px"}

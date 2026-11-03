@@ -41,6 +41,29 @@
                   "text": "Promise<void>"
                 }
               }
+            },
+            {
+              "name": "ensurePanel",
+              "description": "Place an absent panel beside a tab stack, then select it. Preserve existing placements.",
+              "parameters": [
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "options",
+                  "type": {
+                    "text": "EnsurePanelOptions"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
             }
           ]
         },
@@ -57,6 +80,48 @@
                 "text": "string"
               },
               "description": "Panel name referenced by the layout tree."
+            },
+            {
+              "name": "min-width",
+              "type": {
+                "text": "string"
+              },
+              "description": "Min frame width in px, rem, em, or percent of the layout."
+            },
+            {
+              "name": "preferred-width",
+              "type": {
+                "text": "string"
+              },
+              "description": "Preferred frame width in px, rem, em, or percent of the layout."
+            },
+            {
+              "name": "max-width",
+              "type": {
+                "text": "string"
+              },
+              "description": "Max frame width in px, rem, em, or percent of the layout."
+            },
+            {
+              "name": "min-height",
+              "type": {
+                "text": "string"
+              },
+              "description": "Min frame height in px, rem, em, or percent of the layout."
+            },
+            {
+              "name": "preferred-height",
+              "type": {
+                "text": "string"
+              },
+              "description": "Preferred frame height in px, rem, em, or percent of the layout."
+            },
+            {
+              "name": "max-height",
+              "type": {
+                "text": "string"
+              },
+              "description": "Max frame height in px, rem, em, or percent of the layout."
             }
           ],
           "slots": [
