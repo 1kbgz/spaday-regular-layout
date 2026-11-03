@@ -85,6 +85,7 @@ page = (
     RegularLayout(
         panel("Navigation", "Drag this panel's tab to rearrange it.", "navigation"),
         RegularLayoutFrame(
+            element("h2").text("Workspace"),
             element("p").text("Open the editor beside this panel, or below it in a narrow layout."),
             element("button")
             .text("Open editor")

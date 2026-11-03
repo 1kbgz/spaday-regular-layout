@@ -45,4 +45,10 @@ test("runs the complete example in Pyodide", async ({ page }) => {
       timeout: 10_000,
     })
     .toBe("vertical");
+
+  const editor = page.locator('regular-layout-frame[name="editor"]');
+  await expect(editor).toBeHidden();
+  await page.getByRole("button", { name: "Open editor", exact: true }).click();
+  await expect(editor).toBeVisible();
+  await expect(editor).toHaveText("Editor");
 });
